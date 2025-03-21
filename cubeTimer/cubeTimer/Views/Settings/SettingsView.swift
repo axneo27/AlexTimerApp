@@ -63,7 +63,7 @@ struct SettingsView: View {
                     .font(.subheadline)
                     .foregroundColor(.gray)
                     .padding(.leading, 55)
-                Text("\(inspectionData.inspectionEnabled ? 1 : 0)")
+                // Text("\(inspectionData.inspectionEnabled ? 1 : 0)")
                 Spacer()
             }
             settingsSector(
