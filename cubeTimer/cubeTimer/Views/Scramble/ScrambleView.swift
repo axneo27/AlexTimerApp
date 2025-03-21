@@ -17,7 +17,6 @@ struct ScrambleView: View {
     @StateObject var stopWatch: StopWatch = StopWatch()
     
     @State var inspectionTimeRemaining: TimeInterval = 15
-    @State var visibleStopWatchText: TimeInterval = 0
     let inspectionTimer = Timer.publish(every: 1, on: .main, in: .common).autoconnect()
     @State var inspectionRunning = false
     
@@ -121,21 +120,18 @@ struct ScrambleView: View {
                 }
                 else {
                     //stopwatch 2
-                    // inconsistency in saving solves. the real result value varies in +-0.005 seconds. check
                     VStack {
                         GeometryReader {geometry in
                             Button(action: {
                                 if !stopWatch.isRunning && !LaunchReady {
                                     LaunchReady = true
                                     inspectionRunning = true
-                                    visibleStopWatchText = inspectionTimeRemaining
                                     timerColor2 = .red
                                 } else if !stopWatch.isRunning && LaunchReady {
                                     LaunchReady = false
                                     inspectionRunning = false
                                     inspectionTimeRemaining = 15
                                     
-                                    visibleStopWatchText = stopWatch.runningTime
                                     stopWatch.toggleStopwatch()
                                     timerColor2 = .white
                                 } else if stopWatch.isRunning {
@@ -147,7 +143,7 @@ struct ScrambleView: View {
                                 }
                             }) {
                                 ZStack {
-                                    Text("\(inspectionRunning ? String(format: "%.0f", visibleStopWatchText) : String(format: "%.3f", visibleStopWatchText))")
+                                    Text("\(inspectionRunning ? String(format: "%.0f", inspectionTimeRemaining) : String(format: "%.3f", stopWatch.runningTime))")
 
                                         .frame(minWidth: 330, maxHeight: 500, alignment: .center)
                                         .multilineTextAlignment(.center)
@@ -161,7 +157,6 @@ struct ScrambleView: View {
                                                     LaunchReady = false
                                                     inspectionTimeRemaining = 15
                                                     
-                                                    visibleStopWatchText = stopWatch.runningTime
                                                     stopWatch.toggleStopwatch()
                                                     timerColor2 = .white
                                                 }
@@ -182,16 +177,6 @@ struct ScrambleView: View {
                             .foregroundColor(timerColor2)
                             .animation(.easeInOut(duration: 0.07), value: isPressing)
                             .buttonStyle(TimerButtonStyle(theme: $themeManager.currentTheme))
-                        }
-                    }
-                    .onChange(of: stopWatch.runningTime) { newValue in
-                        if stopWatch.isRunning {
-                            visibleStopWatchText = newValue
-                        }
-                    }
-                    .onChange(of: inspectionTimeRemaining) {newValue in
-                        if LaunchReady {
-                            visibleStopWatchText = newValue
                         }
                     }
                     //stopwatch 2
