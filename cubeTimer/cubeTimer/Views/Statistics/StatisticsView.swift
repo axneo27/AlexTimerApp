@@ -11,7 +11,7 @@ import SwiftUI
 struct StatisticsView: View {
     @EnvironmentObject var dataManager: DataManager
     @StateObject private var themeManager = ThemeManager.shared
-    
+    @State private var showAlert = false
     @Binding var solvesArray: [Solve]
     
     @State private var visibleSolves: [Solve] = []
@@ -37,6 +37,16 @@ struct StatisticsView: View {
                         SolvesListView(solves: visibleSolves, deleteAction: deleteSolve)
                     }
                 }
+            }
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Confirm Deletion"),
+                    message: Text("Are you sure you want to delete all solves?"),
+                    primaryButton: .destructive(Text("Delete")) {
+                        dataManager.deleteAllSolves()
+                        solvesArray.removeAll()
+                        visibleSolves.removeAll()
+                    },
+                    secondaryButton: .cancel())
             }
             .onAppear {
 //                fetchSolves()
@@ -101,7 +111,9 @@ struct StatisticsView: View {
             }
             
             dataManager.deleteSolve(at: solveIndex, items: solvesArray) { _ in
-                dataManager.solvesCount -= 1
+                DispatchQueue.main.async {
+                    dataManager.solvesCount -= 1
+                }
                 self.dataManager.setRecords(dis: discipline) { _ in }
             }
 
@@ -111,9 +123,7 @@ struct StatisticsView: View {
     }
 
     private func deleteAllSolves() {
-        dataManager.deleteAllSolves()
-        solvesArray.removeAll()
-        visibleSolves.removeAll()
+        showAlert = true
     }
 
     private func fetchSolves() {
