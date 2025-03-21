@@ -121,6 +121,7 @@ struct ScrambleView: View {
                 }
                 else {
                     //stopwatch 2
+                    // inconsistency in saving solves. the real result value varies in +-0.005 seconds. check
                     VStack {
                         GeometryReader {geometry in
                             Button(action: {
