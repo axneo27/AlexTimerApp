@@ -454,7 +454,7 @@ extension DataManager {
         var fives: [[Solve]] = []
         var avgs: [Float] = []
         for i in 0..<(d.count - num + 1) {
-            let list5 = d[i..<i+num] // hell yeeeeeeeahhhh
+            let list5 = d[i..<i+num] 
             fives.append(Array<Solve>(list5))
             let results5 = list5.map{Float32($0.result)}
             let avgNum = results5.reduce(0.0, +) / Float32(results5.count)
