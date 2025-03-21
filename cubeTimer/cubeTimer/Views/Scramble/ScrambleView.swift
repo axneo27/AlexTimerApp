@@ -45,6 +45,9 @@ struct ScrambleView: View {
     
     @State var timerColor2: Color = .white
     
+    @State var currentAO5: Float = 0
+    @State var currentAO12: Float = 0
+    
     var body: some View {
         ZStack {
             LinearGradient(gradient: Gradient(colors: [themeManager.currentTheme.bgcolor.color, themeManager.currentTheme.secondaryColor.color]), startPoint: UnitPoint(x: 0.5, y: 0.1), endPoint: UnitPoint(x: 0.5, y: 1.3))
@@ -69,6 +72,7 @@ struct ScrambleView: View {
                                     if (!stopWatch.isRunning){
                                         saveSolveInfo()
                                         updateScramble()
+                                        updateAO()
                                     }
                                     self.isClicked = false
                                     self.LaunchReady = false
@@ -79,6 +83,7 @@ struct ScrambleView: View {
                                         .frame(minWidth: 330, maxHeight: 500, alignment: .center)
                                         .multilineTextAlignment(.center)
                                         .font(.system(size: 60))
+                                    averageInfoBlock()
                                 }
                             }
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
@@ -139,12 +144,13 @@ struct ScrambleView: View {
                                     if (!stopWatch.isRunning) {
                                         saveSolveInfo()
                                         updateScramble()
+                                        updateAO()
                                     }
                                 }
                             }) {
                                 ZStack {
                                     Text("\(inspectionRunning ? String(format: "%.0f", inspectionTimeRemaining) : String(format: "%.3f", stopWatch.runningTime))")
-
+                                        .foregroundColor(timerColor2)
                                         .frame(minWidth: 330, maxHeight: 500, alignment: .center)
                                         .multilineTextAlignment(.center)
                                         .font(.system(size: 60))
@@ -162,8 +168,8 @@ struct ScrambleView: View {
                                                 }
                                             }
                                         }
+                                    averageInfoBlock()
                                 }
-                                
                             }
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                             .background(GeometryReader { geometry in
@@ -174,7 +180,6 @@ struct ScrambleView: View {
                                     }
                             })
                             .position(x: geometry.size.width / 2, y: geometry.size.height / 2 + (geometry.size.height / 2 - StopWatchPosition.y / 2) - 160)
-                            .foregroundColor(timerColor2)
                             .animation(.easeInOut(duration: 0.07), value: isPressing)
                             .buttonStyle(TimerButtonStyle(theme: $themeManager.currentTheme))
                         }
@@ -190,9 +195,12 @@ struct ScrambleView: View {
             if scramble == "" {
                 updateScramble()
             }
+            updateAO()
+            
         }
         .onChange(of: selectedPuzzle, perform: { _ in
             updateScramble()
+            updateAO()
         })
         
     }
@@ -201,12 +209,38 @@ struct ScrambleView: View {
         scramble = Updater.getScramble(selectedPuzzle)
     }
     
+    private func updateAO() {
+        dataManager.getCurrentAO(selectedPuzzle) { (ao5, ao12) in
+            currentAO5 = ao5
+            currentAO12 = ao12
+        }
+    }
+    
     private func saveSolveInfo() {
         dataManager.saveSolve(date: .now, result: Float(stopWatch.runningTime), scramble: self.scramble, discipline: selectedPuzzle) { _ in
+            DispatchQueue.main.async {
                 dataManager.solvesCount += 1 // s
-                dataManager.updRecords { _ in }
-                // dispatchmainasync was excluded
+            }
+            dataManager.updRecords { _ in }
         }
+    }
+    
+    private func averageInfoBlock() -> some View {
+        HStack {
+            VStack {
+                Text("AO5: ")
+                Text(String(format: "%.3f", currentAO5))
+            }
+            .padding()
+            VStack {
+                Text("AO12: ")
+                Text(String(format: "%.3f", currentAO12))
+            }
+            .padding()
+        }
+        .offset(y: 80)
+        .font(.system(size: 20))
+        .foregroundColor(themeManager.currentTheme.thirdColor.color)
     }
 }
 
