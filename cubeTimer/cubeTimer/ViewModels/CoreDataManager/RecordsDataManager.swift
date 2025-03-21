@@ -256,6 +256,35 @@ extension DataManager {
             }
         }
     }
+    
+    public func getCurrentAO(_ discipline: Discipline, completion: @escaping (Float, Float)->Void) {
+        //here also check
+        context.perform {
+            self.clearByDiscipline()
+            do {
+                try self.fetchAllSolves { solves in
+                    guard let solves = solves else {
+                        completion(0.0, 0.0)
+                        return
+                    }
+                    self.setByDiscipline(in: solves)
+                    var a5: Float = 0.0, a12: Float = 0.0
+                    if let res5 = self.getAvgLast(from: discipline, 5) {
+                        a5 = res5.0
+                    }
+                    if let res12 = self.getAvgLast(from: discipline, 12) {
+                        a12 = res12.0
+                    }
+                    completion(a5, a12)
+                }
+            }
+            catch {
+                print("WTH")
+                completion(0.0, 0.0)
+                return
+            }
+        }
+    }
 }
 
 extension DataManager {
@@ -454,7 +483,7 @@ extension DataManager {
         var fives: [[Solve]] = []
         var avgs: [Float] = []
         for i in 0..<(d.count - num + 1) {
-            let list5 = d[i..<i+num] // hell yeeeeeeeahhhh
+            let list5 = d[i..<i+num] 
             fives.append(Array<Solve>(list5))
             let results5 = list5.map{Float32($0.result)}
             let avgNum = results5.reduce(0.0, +) / Float32(results5.count)
