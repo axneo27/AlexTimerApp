@@ -19,7 +19,7 @@ enum SError: Error {
 }
 
 final class RequestMaker{
-    private var urlString: String = "http://127.0.0.1:8000/scramble"
+    private var urlString: String = "http://127.0.0.1:8000/scramble" // tested only locally
     private var url: URL?
     
     public var discipline: Discipline?
