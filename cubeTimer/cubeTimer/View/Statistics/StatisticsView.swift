@@ -44,7 +44,7 @@ struct StatisticsView: View {
                         DeleteButtonView(deleteAction: deleteAllSolves, count: visibleSolves.count)
 
                         if visibleSolves.isEmpty {
-                            NoSolvesForPuzzleView(puzzleName: Puzzlenames[selectedPuzzle]!) //look
+                            NoSolvesForPuzzleView(puzzleName: Puzzlenames[selectedPuzzle]!)
                         } else {
                             SolvesListView(solves: visibleSolves, deleteAction: deleteSolve)
                         }
@@ -107,23 +107,24 @@ struct StatisticsView: View {
         .buttonStyle(GrowingButton(backCol: .red))
         .foregroundColor(.white)
     }
-
+    
     private func SolvesListView(solves: [Solve], deleteAction: @escaping (IndexSet) -> Void) -> some View {
-        List {
-            ForEach(solves.reversed(), id: \.self) { solve in
-                if let date = solve.date, let dis = solve.discipline,
-                   let sc = solve.scramble, let solveid = solve.id {
-                    SolveInfoBlock(solveDate: date, solveDiscipline: dis, solveResult: solve.result, solveScramble: sc, solveID: solveid, $showingScrambleGrid, $shownScramble, $shownDiscipline)
-                        .listRowBackground(Color.clear)
-                        .listRowSeparatorTint(.clear)
+        ScrollView {
+            LazyVStack {
+                ForEach(solves.reversed(), id: \.self) { solve in
+                    if let date = solve.date, let dis = solve.discipline,
+                       let sc = solve.scramble, let solveid = solve.id {
+                        SolveInfoBlock(solveDate: date, solveDiscipline: dis, solveResult: solve.result, solveScramble: sc, solveID: solveid, $showingScrambleGrid, $shownScramble, $shownDiscipline)
+                            .listRowBackground(Color.clear)
+                            .listRowSeparatorTint(.clear)
+                            .padding(8)
+                    }
                 }
+                .onDelete(perform: deleteAction)
             }
-            .onDelete(perform: deleteAction)
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)
-        .transition(.slide)
-        .id(UUID())
     }
     
     private func switchViewButtons() -> some View {
