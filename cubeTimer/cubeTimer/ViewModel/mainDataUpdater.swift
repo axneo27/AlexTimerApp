@@ -19,28 +19,39 @@ final class mainDataUpdater : ObservableObject{
      .six: []]
     @Published private var successfullAPIconnection: Bool = false
     
-    public func getScramble(_ discipline: Discipline) -> String{
-        if scramblesWCA[discipline]!.count == 0 {
-//            self.successfullAPIconnection = getScrambleAPI(discipline)
+    public func getScramble(_ discipline: Discipline) -> String {
+        if scramblesWCA[discipline]!.isEmpty {
+            DispatchQueue.global(qos: .utility).async {
+                self.getScrambleAPI(discipline) { newScrambles in
+                    print(newScrambles ?? "nil in api")
+                    print(self.scramblesWCA[discipline]!.count)
+                }
+            }
             return getScrambleLocally(discipline)
         } else {
             return scramblesWCA[discipline]!.removeLast()
         }
     }
     
-//    private func getScrambleAPI(_ discipline: Discipline) -> Bool {
-//        let requestMaker: RequestMaker = RequestMaker(puzzleType: discipline, count: 10)
-//        var result: Bool = false
-//        requestMaker.getScramblesString{ scrambleArray in
-//            if let scrambles = scrambleArray {
-//                for i in 0..<scrambles.count {
-//                    self.scramblesWCA[discipline]!.append(scrambles[i])
-//                }
-//                result = true
-//            }
-//        }
-//        return result
-//    }
+    private func getScrambleAPI(_ discipline: Discipline, completion: @escaping ([String]?) -> Void) -> Void {
+        if discipline == .five || discipline == .six {
+            self.successfullAPIconnection = false
+            completion(nil)
+            return
+        }
+        let requestMaker: RequestMaker = RequestMaker(puzzleType: discipline, count: 5)
+        
+        requestMaker.getScramblesString{ scrambleArray in
+            if let scrambles = scrambleArray {
+                self.scramblesWCA[discipline]! = scrambles
+                self.successfullAPIconnection = false
+                
+                completion(scrambleArray)
+            } else {
+                completion(nil)
+            }
+        }
+    }
     
     private func getScrambleLocally(_ discipline: Discipline) -> String {
         switch discipline{
