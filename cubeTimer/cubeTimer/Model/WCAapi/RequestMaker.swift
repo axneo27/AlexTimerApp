@@ -19,8 +19,9 @@ enum SError: Error {
 }
 
 final class RequestMaker{
-    private var urlString: String = "http://127.0.0.1:8000/scramble"
-    private var url: URL?
+    
+    private var urlString: String = "https://tnoodle-api-production.up.railway.app/scramble"
+//    private var urlString: String = "http://localhost:80/scramble" // for tests
     
     public var discipline: Discipline?
     public var count: Int = 1
@@ -38,11 +39,11 @@ final class RequestMaker{
     init(puzzleType: Discipline, count: Int) {
         self.count = count
         self.discipline = puzzleType
-        urlString+="/\(self.puzzle)/\(self.count)"
     }
     
     private func fetchScramble() async throws -> [ScrambleJson] {
-        let endpoint = "http://127.0.0.1:8000/scramble/\(self.puzzle)/\(self.count)"
+        let endpoint = urlString+"/\(self.puzzle)/\(self.count)"
+        print(endpoint)
         
         guard let url = URL(string: endpoint) else {throw SError.invalidURL}
         
@@ -64,18 +65,15 @@ final class RequestMaker{
     }
     
     public func getScramblesString(completion: @escaping ([String]?) -> (Void)) {
-        DispatchQueue.global().async {
+        DispatchQueue.main.async {
             Task {
                 do{
                     self.scramblesJson = try await self.fetchScramble()
                     let scramblesString = self.scramblesJson?.compactMap{$0.scramble}
-                    DispatchQueue.main.async {
-                        completion(scramblesString)
-                    }
+                    completion(scramblesString)
                 } catch {
-                    DispatchQueue.main.async {
-                        completion(nil)
-                    }
+                    print("Error in getScramblesString (but obviously was thrown in fetchScramble): \(error)")
+                    completion(nil)
                 }
             }
         }
