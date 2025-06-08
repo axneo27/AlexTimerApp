@@ -12,6 +12,7 @@ A speedcubing timer & utility app
 * Simple and modern user interface
 * Has two themes available
 * Fully works offline
+* Can take scramble data from my tnoodle API (provided user has access to internet connection)
 
 ## Screenshots
 ### IOS
@@ -28,7 +29,9 @@ A speedcubing timer & utility app
   * Press mode
   * 15-second inspection mode
   * Check scramble by visual representation
-  * Custom scramble generation
+  * Scramble generation:
+    * Custom algorithms
+    * Taking them from my deployed tnoodle API
 
 * Simple design for viewing statistics
   * Sorting by puzzle
@@ -49,10 +52,11 @@ A speedcubing timer & utility app
   * Color theme for you preferences
 
 ## Possible fututre improvements
-* Putting my Tnoddle API on web server for users to be able to get official scrambles
 
 * More timer customization tools
 
 * Better control of statistics (e. g. multiple deletion)
 
-* Improving performance and just refactoring code 
+* Adding Authorization functionality and storing statistics in firebase DB or Cloud
+
+* Improving performance and just refactoring code
