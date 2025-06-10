@@ -12,6 +12,7 @@ struct SettingsView: View {
     @ObservedObject var inspectionData = InspectionData.shared
     
     @State private var isMenuOpen = false
+    @State private var err: String = ""
     
     var body: some View {
         VStack {
@@ -75,6 +76,38 @@ struct SettingsView: View {
                 }
                 .padding()
             )
+            
+            HStack {
+                Text("Sign in")
+                    .font(.subheadline)
+                    .foregroundColor(.gray)
+                    .padding(.leading, 55)
+                    .padding()
+                Spacer()
+            }
+            
+            Button(action: {
+                print("clicked sign in")
+                Task {
+                    do {
+                        print("do")
+                        try await Authentication().googleOauth()
+                    } catch AuthenticationError.runtimeError(let errorMessage) {
+                        err = errorMessage
+                        print(err)
+                    }
+                }
+            }) {
+                HStack {
+                    Image(systemName: "person.badge.key.fill")
+                    Text("Sign in with Google")
+                }.padding(8)
+            }
+            .buttonStyle(.borderedProminent)
+            .tint(themeManager.currentTheme.secondaryColor.color)
+            
+            Text(err).foregroundColor(.red).font(.caption)
+            
             Spacer()
         }
     }

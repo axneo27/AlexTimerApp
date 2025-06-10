@@ -35,7 +35,7 @@ struct CodableColor: Codable {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         if let colorData = try? container.decode(Data.self, forKey: .color) {
             if #available(iOS 14.0, *) {
-                if let uiColor = try? NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(colorData) as? UIColor {
+                if let uiColor = try? NSKeyedUnarchiver.unarchivedObject(ofClass: UIColor.self, from: colorData) {
                     self.color = Color(uiColor)
                     return
                 }

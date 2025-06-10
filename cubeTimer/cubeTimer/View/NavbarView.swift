@@ -5,12 +5,16 @@
 //  Created by Oleksii on 02.01.2025.
 //
 //
+
 import SwiftUI
 import Foundation
+import FirebaseAuth
+import GoogleSignIn
 
 class SharedState: ObservableObject {
     @Published var solvesArray: [Solve] = []
     @Published var selectedTab: Int = 0
+    @Published var userLoggedIn = (Auth.auth().currentUser != nil)
 }
 
 struct NavbarView: View {
@@ -39,6 +43,9 @@ struct NavbarView: View {
                 }
                 .tag(2)
                 .badge(dataManager.solvesCount)
+                .onOpenURL { url in
+                    GIDSignIn.sharedInstance.handle(url)
+                }
 
             SettingsView()
                 .tabItem {
@@ -67,7 +74,13 @@ struct NavbarView: View {
                 UITabBar.appearance().scrollEdgeAppearance = tabBarAppearance
             }
             
-            
+            Auth.auth().addStateDidChangeListener{ auth, user in
+                if (user != nil) {
+                    sharedState.userLoggedIn = true
+                } else {
+                    sharedState.userLoggedIn = false
+                }
+            }
         }
         .accentColor(.red)
     }
@@ -75,8 +88,10 @@ struct NavbarView: View {
     private func fetchSolves() {
         do {
             try dataManager.fetchAllSolves { solves in
-                sharedState.solvesArray = solves ?? []
-                sharedState.solvesArray.sort{$0.date! < $1.date!}
+                DispatchQueue.main.async { // a
+                    sharedState.solvesArray = solves ?? []
+                    sharedState.solvesArray.sort { $0.date! < $1.date! }
+                }
             }
         } catch {
             print("Error fetching solves")

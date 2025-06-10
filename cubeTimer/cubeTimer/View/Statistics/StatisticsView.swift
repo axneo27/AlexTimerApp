@@ -109,19 +109,17 @@ struct StatisticsView: View {
     }
     
     private func SolvesListView(solves: [Solve], deleteAction: @escaping (IndexSet) -> Void) -> some View {
-        ScrollView {
-            LazyVStack {
-                ForEach(solves.reversed(), id: \.self) { solve in
-                    if let date = solve.date, let dis = solve.discipline,
-                       let sc = solve.scramble, let solveid = solve.id {
-                        SolveInfoBlock(solveDate: date, solveDiscipline: dis, solveResult: solve.result, solveScramble: sc, solveID: solveid, $showingScrambleGrid, $shownScramble, $shownDiscipline)
-                            .listRowBackground(Color.clear)
-                            .listRowSeparatorTint(.clear)
-                            .padding(8)
-                    }
+        List {
+            ForEach(solves.reversed(), id: \.self) { solve in
+                if let date = solve.date, let dis = solve.discipline,
+                   let sc = solve.scramble, let solveid = solve.id {
+                    SolveInfoBlock(solveDate: date, solveDiscipline: dis, solveResult: solve.result, solveScramble: sc, solveID: solveid, $showingScrambleGrid, $shownScramble, $shownDiscipline)
+                        .listRowBackground(Color.clear)
+                        .listRowSeparatorTint(.clear)
+//                        .padding(8)
                 }
-                .onDelete(perform: deleteAction)
             }
+            .onDelete(perform: deleteAction)
         }
         .listStyle(.plain)
         .scrollContentBackground(.hidden)

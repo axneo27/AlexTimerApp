@@ -314,6 +314,7 @@ extension DataManager {
             output["ao12"] = foundRecord
             group.leave()
         })
+        
         group.notify(queue: .main) {
             completion(output)
         }
