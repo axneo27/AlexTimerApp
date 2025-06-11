@@ -13,6 +13,7 @@ A speedcubing timer & utility app
 * Has two themes available
 * Fully works offline
 * Can take scramble data from my tnoodle API (provided user has access to internet connection)
+* Uses Firebase Google OAuth (for future network actions)
 
 ## Screenshots
 ### IOS
@@ -57,6 +58,6 @@ A speedcubing timer & utility app
 
 * Better control of statistics (e. g. multiple deletion)
 
-* Adding Authorization functionality and storing statistics in firebase DB or Cloud
+* Adding sharing records functionality that uses Firestore with already implemented Google OAuth
 
 * Improving performance and just refactoring code
