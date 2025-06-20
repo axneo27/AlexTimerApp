@@ -42,13 +42,15 @@ struct FirestoreRecordInfo: View {
         }
         .contentShape(Rectangle())
         .onTapGesture {
-            if recordPresented == nil {
+           if recordPresented == nil {
+                if !self.record.alreadySeen {
+                    onTap2(documentID)
+                    Task {
+                        await onTap(documentID)
+                    }
+                }
                 recordPresented = self.record
                 self.record.alreadySeen = true
-                onTap2(documentID)
-                Task {
-                    await onTap(documentID)
-                }
             }
         }
     }
