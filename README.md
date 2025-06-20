@@ -11,17 +11,18 @@ A speedcubing timer & utility app
 * Uses CoreData for storing solves information and statistics
 * Simple and modern user interface
 * Has two themes available
-* Fully works offline
-* Can take scramble data from my tnoodle API (provided user has access to internet connection)
-* Uses Firebase Google OAuth (for future network actions)
+* Works both online and offline
+* Can take scramble data from my remote tnoodle API
+* Uses Firebase Google OAuth, Firestore Cloud tools
+* Has networking functionality
 
 ## Screenshots
 ### IOS
 
-<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/images/timer_orange.png?raw=true?token=GHSAT0AAAAAAC5AIL2ORTUXDMGAMWEI25IK2BS2WRA" alt="timer orange" width="150"/> <img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/timer_puzzles.png?" alt="timer puzzles" width="150"/> <img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/timer_visual_3x3.png?" alt="timer puzzles" width="150"/> <img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/records.png?" alt="timer puzzles" width="150"/>
+<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.20.54.png?raw=true" alt="timer orange" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.22.03.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.24.27.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.24.54.png?raw=true" alt="timer puzzles" width="150"/>
 
 
-<img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/stats_all.png?" alt="timer puzzles" width="150"/> <img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/stats_4x4visual.png?" alt="timer puzzles" width="150"/> <img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/graph_2x2.png?" alt="timer puzzles" width="150"/> <img src="https://raw.githubusercontent.com/axneo27/AlexTimerApp/refs/heads/main/.github/images/settings.png?" alt="timer puzzles" width="150"/>
+<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.25.06.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.26.46.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.27.06.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.28.50.png?raw=true" alt="timer puzzles" width="150"/>
 
 ## Features
 ### App features
@@ -30,9 +31,7 @@ A speedcubing timer & utility app
   * Press mode
   * 15-second inspection mode
   * Check scramble by visual representation
-  * Scramble generation:
-    * Custom algorithms
-    * Taking them from my deployed tnoodle API
+  * Custom scramble generation
 
 * Simple design for viewing statistics
   * Sorting by puzzle
@@ -48,16 +47,18 @@ A speedcubing timer & utility app
   * Current and best average of 5
   * Current and best average of 12
 
-* Settings. Here you can change
-  * Timer mode
-  * Color theme for you preferences
+* Settings. Here you can
+  * change Timer mode
+  * choose Color theme for you preferences
+  * share records for the given type of discipline
+
+* Receiving records from other users
 
 ## Possible fututre improvements
+* Adding more network functionality
 
 * More timer customization tools
 
 * Better control of statistics (e. g. multiple deletion)
 
-* Adding sharing records functionality that uses Firestore with already implemented Google OAuth
-
-* Improving performance and just refactoring code
+* Improving performance and just refactoring code 
