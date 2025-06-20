@@ -50,9 +50,10 @@ struct ReceivedRecordsView: View {
                 .height(800)
             ])
         }
-        .onAppear { // for test
-//            print("marking as seen")
-//            firestoreManager.markSharedRecordsAsSeen()
+        .onAppear { 
+            Task {
+                await firestoreManager.getSeenSharedRecordsFromFirestore() 
+            }
         }
         .onChange(of: presentedRecord) {newValue in
             if newValue != nil {
