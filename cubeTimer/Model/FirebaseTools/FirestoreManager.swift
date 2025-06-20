@@ -30,7 +30,7 @@ public final class FirestoreManager: ObservableObject {
             let snapshot = try await firestoreDB.collection("sharedRecords")
                 .whereField("receiverEmail", isEqualTo: curUser.email as Any)
                 .whereField("alreadySeen", isEqualTo: true as Any)
-                .order(by: "date", descending: true).getDocuments()
+                .order(by: "lastUpdate", descending: true).getDocuments()
             
             try snapshot.documents.forEach {doc in
                 let sharedRecord = try doc.data(as: FirestoreSharedRecord.self)
