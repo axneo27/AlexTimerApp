@@ -21,12 +21,12 @@ final class mainDataUpdater : ObservableObject{
     
     public func getScramble(_ discipline: Discipline) -> String {
         if scramblesWCA[discipline]!.isEmpty {
-//            DispatchQueue.global(qos: .utility).async {
-//                self.getScrambleAPI(discipline) { newScrambles in
-//                    print(newScrambles ?? "nil in api")
-//                    print(self.scramblesWCA[discipline]!.count)
-//                }
-//            } for now no
+            DispatchQueue.global(qos: .utility).async {
+                self.getScrambleAPI(discipline) { newScrambles in
+                   print(newScrambles ?? "nil in api")
+                   print(self.scramblesWCA[discipline]!.count)
+                }
+            }
             return getScrambleLocally(discipline)
         } else {
             return scramblesWCA[discipline]!.removeLast()
