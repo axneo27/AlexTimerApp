@@ -51,8 +51,7 @@ A speedcubing timer & utility app
   * change Timer mode
   * choose Color theme for you preferences
   * share records for the given type of discipline
-
-* Receiving records from other users
+  * receive records from other users
 
 ## Possible fututre improvements
 * Adding more network functionality
