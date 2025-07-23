@@ -1,7 +1,8 @@
+<div align="center">
+<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/AlexTimerIcon.png?raw=true" alt="timer orange" width="150"/>
+</div>
 
 # AlexTimer
-(Have not come up with an icon idea yet)
-
 A speedcubing timer & utility app
 
 ## Overview
@@ -51,7 +52,8 @@ A speedcubing timer & utility app
   * change Timer mode
   * choose Color theme for you preferences
   * share records for the given type of discipline
-  * receive records from other users
+
+* Receiving records from other users
 
 ## Possible fututre improvements
 * Adding more network functionality

@@ -17,6 +17,7 @@ struct ReceivedRecordsView: View {
     @State private var presentedRecord: FirestoreSharedRecord? = nil
     
     @State private var allReceivedRecords: [String : FirestoreSharedRecord] = [:]
+//    ["44393A0D-FBB8-424A-883F-1F5F3A54CB9F": FirestoreSharedRecord(alreadySeen: false, bestAO12: nil, bestAO5: Optional(cubeTimer.FirestoreBestAO(date: Date(), discipline: "3x3", result: Optional(6.275000095367432), solves: [cubeTimer.FirestoreSolve(result: 7.215000152587891, scramble: "B2 L2 U\' B L F\' R\' L B F\' L B D R2 U D\' L\' R U D2 L B\' F\' L2 "), cubeTimer.FirestoreSolve(result: 6.414000034332275, scramble: "D2 F U B2 D\' R B\' L\' F U\' L2 R2 B U R2 D2 F B R L2 B2 R F\' U "), cubeTimer.FirestoreSolve(result: 6.196000099182129, scramble: "F\' R\' L\' B\' F\' D\' B F2 R\' U D F2 U\' D B2 U\' R F B\' D F B\' R U "), cubeTimer.FirestoreSolve(result: 5.264999866485596, scramble: "D B2 L D\' U\' R D B L D B\' U2 R B2 D2 L2 F D2 U\' L D F2 U B2 "), cubeTimer.FirestoreSolve(result: 6.215000152587891, scramble: "R L2 F\' U\' R2 L\' B\' U F B\' D2 F R2 B L D\' B2 F2 L2 B R L\' U2 R\' ")])), bestSingle: Optional(cubeTimer.FirestoreBestSingle(date: Date(), discipline: "3x3", result: Optional(5.264999866485596), solve: Optional(cubeTimer.FirestoreSolve(result: 5.264999866485596, scramble: "D B2 L D\' U\' R D B L D B\' U2 R B2 D2 L2 F D2 U\' L D F2 U B2 ")))), lastUpdate: Date(), receiverEmail: "astrofymchuk@gmail.com", senderEmail: "user123@gmail.com")]
     
     var body: some View {
         StickyHeader(defaultHeaderHeight: defaultHeaderHeight,
@@ -60,6 +61,7 @@ struct ReceivedRecordsView: View {
             print("received seen shared records. count: \(newValue.count)")
             for (k, v) in newValue {
                 allReceivedRecords[k] = v
+                print(allReceivedRecords)
             }
         }
         
@@ -96,9 +98,12 @@ struct ReceivedRecordsView: View {
         }
     }
     
-    func removeNewReceivedRecord(_ id: String) { // 
-        firestoreManager.seenSharedRecords[id] = firestoreManager.newReceivedSharedRecords[id]!
-        firestoreManager.newReceivedSharedRecords.removeValue(forKey: id)
+    func removeNewReceivedRecord(_ id: String) { //
+        if let newReceived = firestoreManager.newReceivedSharedRecords[id] {
+            firestoreManager.seenSharedRecords[id] = newReceived
+            firestoreManager.newReceivedSharedRecords.removeValue(forKey: id)
+        }
+        
     }
 }
 
