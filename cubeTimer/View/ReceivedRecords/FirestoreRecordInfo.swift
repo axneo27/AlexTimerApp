@@ -38,6 +38,7 @@ struct FirestoreRecordInfo: View {
                 Image(systemName: "circle.fill")
                     .font(.system(size: 11, weight: .medium))
                     .foregroundColor(.red)
+                    .offset(x: -40, y: -10)
             }
         }
         .contentShape(Rectangle())
@@ -59,7 +60,8 @@ struct FirestoreRecordInfo: View {
 struct FirestoreSharedRecord_Previews: PreviewProvider {
     static var sampleRecord: FirestoreSharedRecord! = .init(alreadySeen: false, bestAO12: nil, bestAO5: nil, bestSingle: FirestoreBestSingle(date: Date(), discipline: "3x3", result: 3.333, solve: FirestoreSolve(result: 4.4444, scramble: "R U R' U'")), lastUpdate: Date(), receiverEmail: "astrofymchuk@gmail.com", senderEmail: "friend@gmail.com")
     @State static var s: FirestoreSharedRecord? = nil
-    static var f: (String) async -> Void = {_ in 
+    
+    static var f: (String) async -> Void = {_ in
         
     }
     static var f2: (String) -> Void = {_ in
