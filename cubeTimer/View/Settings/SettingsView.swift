@@ -140,12 +140,12 @@ struct SettingsView: View {
                     }
                 }
                 
-                Button("testShare", action: {
-                    print("clicked test")
-                    Task {
-                        await firestoreManager.addTestSharedRecordForCurrentUser(for: .three, dataManager.getRecordsForDiscipline)
-                    }
-                })
+//                Button("testShare", action: {
+//                    print("clicked test")
+//                    Task {
+//                        await firestoreManager.addTestSharedRecordForCurrentUser(for: .three, dataManager.getRecordsForDiscipline)
+//                    }
+//                })
                 
                 if isShowingUsersList {
                     VStack {

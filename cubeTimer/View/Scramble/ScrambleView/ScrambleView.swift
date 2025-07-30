@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import UIKit
 
 struct ScrambleView: View {
     @EnvironmentObject var dataManager: DataManager
@@ -69,7 +70,7 @@ struct ScrambleView: View {
                     //stopwatch 1
                     VStack{
                         GeometryReader { geometry in
-                            Button(action: { // color does not change on device ?? UPD: Now has to work
+                            Button(action: {
                                 if LaunchReady || stopWatch.isRunning {
                                     stopWatch.toggleStopwatch()
                                     if (!stopWatch.isRunning){
@@ -89,6 +90,7 @@ struct ScrambleView: View {
                                     averageInfoBlock()
                                 }
                             }
+                            //.sensoryFeedback(.impact(flexibility: .soft, intensity: 0.5), trigger: LaunchReady)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                             .background(GeometryReader { geometry in
                                 Color.clear
@@ -110,6 +112,7 @@ struct ScrambleView: View {
                                         if !stopWatch.isRunning{
                                             self.LaunchReady = true
                                             isPressing = false
+                                            triggerImpactFeedback(style: .medium) //this
                                         }
                                     })
                             )
@@ -281,6 +284,12 @@ struct ScrambleView: View {
         .offset(y: 80)
         .font(.system(size: 20))
         .foregroundColor(themeManager.currentTheme.fourthColor.color)
+    }
+    
+    private func triggerImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.prepare()
+        generator.impactOccurred()
     }
 }
 

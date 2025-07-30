@@ -104,7 +104,7 @@ struct LineGraphView: View {
                             .foregroundColor(.white)
                             .offset(y: -20)
                     }
-                    .frame(minWidth: 340)
+                    .frame(minWidth: 370)
                     .offset(x: -40)
                 }
             }
@@ -123,12 +123,12 @@ struct LineGraphView: View {
     private func filterSolves() {
         visibleSolves = []
         var i = 0
-        for solve in solvesArray {
+        for solve in solvesArray.reversed() {
             guard let discipline = Puzzlenames.getByString(solve.discipline!) else {
                 return
             }
             if discipline == selectedPuzzle {
-                visibleSolves.append(solve)
+                visibleSolves.insert(solve, at: 0)
                 i+=1
                 switch(graphType){
                 case .last20:
