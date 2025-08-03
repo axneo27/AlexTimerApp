@@ -9,6 +9,8 @@ import SceneKit
 
 struct CubeScramble3DView: UIViewRepresentable {
     @Binding var cubeVertices: [[Color?]]
+    private let cubeSize: CGFloat = 0.6
+    let cube = SCNNode(geometry: SCNBox(width: 0.6, height: 0.6, length: 0.6, chamferRadius: 0.025))
     
     init(cv: Binding<[[Color?]]>) {
         self._cubeVertices = cv
@@ -94,47 +96,79 @@ struct CubeScramble3DView: UIViewRepresentable {
 //        cubeVertices[i + cubeWH*2][j + cubeWH] = .yellow
     }
     
-    func makeUIView(context: Context) -> SCNView {
-        let sceneView = SCNView()
-        let scene = SCNScene()
-            
-        let cube = SCNNode(geometry: SCNBox(width: 0.6, height: 0.6, length: 0.6, chamferRadius: 0.025))
-        
+    func setMaterials() {
         let sideVertices = getSidesVerticesArray()
         var materials: [SCNMaterial] = []
         for i in sideVertices {
             materials.append(createGridMaterial(from: i))
         }
-        cube.geometry?.materials = materials //
+        cube.geometry?.materials = materials
+    }
+    
+    func makeUIView(context: Context) -> SCNView {
+        let sceneView = SCNView()
+        let scene = SCNScene()
         
+        let cube = createCubeNode()
         scene.rootNode.addChildNode(cube)
+        
+        let cameraNode = createCameraNode(target: cube)
+        scene.rootNode.addChildNode(cameraNode)
+        
+        sceneView.scene = scene
+        sceneView.allowsCameraControl = true
+        sceneView.backgroundColor = .black
+        sceneView.isOpaque = false
+        
+        context.coordinator.cubeNode = cube
+        
+        return sceneView
+    }
+
+    func updateUIView(_ uiView: SCNView, context: Context) {
+        if let cube = context.coordinator.cubeNode {
+            updateMaterials(for: cube)
+        }
+    }
+    
+    private func createCubeNode() -> SCNNode {
+        let cube = SCNNode(geometry: SCNBox(
+            width: cubeSize,
+            height: cubeSize,
+            length: cubeSize,
+            chamferRadius: 0.025
+        ))
+        updateMaterials(for: cube)
+        return cube
+    }
+    
+    private func createCameraNode(target: SCNNode) -> SCNNode {
         let camera = SCNCamera()
         let cameraNode = SCNNode()
         cameraNode.camera = camera
         cameraNode.position = SCNVector3(0.8, 1, 1.5)
-        let lookAtConstraint = SCNLookAtConstraint(target: cube)
+        let lookAtConstraint = SCNLookAtConstraint(target: target)
         cameraNode.constraints = [lookAtConstraint]
         cameraNode.camera?.focalLength = 40
-        scene.rootNode.addChildNode(cameraNode)
-        
-//        let light = SCNLight()
-//        light.type = .area
-//        let lightNode = SCNNode()
-//        lightNode.light = light
-//        lightNode.position = SCNVector3(-1, 1,4)
-//        scene.rootNode.addChildNode(lightNode)
-    
-        sceneView.scene = scene
-        sceneView.allowsCameraControl = true
-        sceneView.backgroundColor = UIColor.black
-        
-        sceneView.isOpaque = false
-//        sceneView.backgroundColor = .clear
-
-        return sceneView
+        return cameraNode
     }
-
-    func updateUIView(_ uiView: SCNView, context: Context) {}
+    
+    private func updateMaterials(for cube: SCNNode) {
+        let sideVertices = getSidesVerticesArray()
+        var materials: [SCNMaterial] = []
+        for side in sideVertices {
+            materials.append(createGridMaterial(from: side))
+        }
+        cube.geometry?.materials = materials
+    }
+    
+    func makeCoordinator() -> Coordinator {
+        Coordinator()
+    }
+    
+    class Coordinator {
+        var cubeNode: SCNNode?
+    }
 }
 
 #Preview {
