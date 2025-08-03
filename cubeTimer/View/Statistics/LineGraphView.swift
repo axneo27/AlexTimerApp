@@ -100,9 +100,9 @@ struct LineGraphView: View {
                                 })
                             }
                         }
-                        Text("Solves numeration")
-                            .foregroundColor(.white)
-                            .offset(y: -20)
+//                        Text("Solves numeration")
+//                            .foregroundColor(.white)
+//                            .offset(y: -20)
                     }
                     .frame(minWidth: 370)
                     .offset(x: -40)

@@ -90,7 +90,6 @@ struct ScrambleView: View {
                                     averageInfoBlock()
                                 }
                             }
-                            //.sensoryFeedback(.impact(flexibility: .soft, intensity: 0.5), trigger: LaunchReady)
                             .frame(minWidth: 0, maxWidth: .infinity, minHeight: 0, maxHeight: .infinity, alignment: .center)
                             .background(GeometryReader { geometry in
                                 Color.clear
@@ -121,6 +120,16 @@ struct ScrambleView: View {
                                     .onEnded { _ in
                                         if isPressing {
                                             isPressing = false
+                                            isClicked = false 
+                                        }
+                                    }
+                            )
+                            .simultaneousGesture( // try this
+                                DragGesture(minimumDistance: 10)
+                                    .onChanged { _ in
+                                        if isPressing {
+                                            isPressing = false
+                                            isClicked = false
                                         }
                                     }
                             )

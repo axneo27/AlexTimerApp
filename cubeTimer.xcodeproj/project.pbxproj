@@ -11,6 +11,7 @@
 		4959A3052DD2195A008CD582 /* PopUp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4959A3042DD21956008CD582 /* PopUp.swift */; };
 		4959A3072DD219D4008CD582 /* FrameGetter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4959A3062DD219CF008CD582 /* FrameGetter.swift */; };
 		495FEF122DC4DC140002FC2A /* ScrambleGrid.swift in Sources */ = {isa = PBXBuildFile; fileRef = 495FEF112DC4DC0C0002FC2A /* ScrambleGrid.swift */; };
+		496299A52E3C01BC00CFF7E1 /* Scramble3DView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 496299A42E3C01B400CFF7E1 /* Scramble3DView.swift */; };
 		498D2E1B2DD1064800B38B41 /* ScrambleMatrixGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498D2E1A2DD105F200B38B41 /* ScrambleMatrixGenerator.swift */; };
 		498D2E1D2DD10B3900B38B41 /* ScrambleMatrixGenerator+3x3.swift in Sources */ = {isa = PBXBuildFile; fileRef = 498D2E1C2DD10B2200B38B41 /* ScrambleMatrixGenerator+3x3.swift */; };
 		49922E162DF6C73D0018EC64 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 49922E152DF6C73D0018EC64 /* FirebaseAuth */; };
@@ -91,6 +92,7 @@
 		4959A3042DD21956008CD582 /* PopUp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUp.swift; sourceTree = "<group>"; };
 		4959A3062DD219CF008CD582 /* FrameGetter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrameGetter.swift; sourceTree = "<group>"; };
 		495FEF112DC4DC0C0002FC2A /* ScrambleGrid.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambleGrid.swift; sourceTree = "<group>"; };
+		496299A42E3C01B400CFF7E1 /* Scramble3DView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scramble3DView.swift; sourceTree = "<group>"; };
 		498D2E1A2DD105F200B38B41 /* ScrambleMatrixGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrambleMatrixGenerator.swift; sourceTree = "<group>"; };
 		498D2E1C2DD10B2200B38B41 /* ScrambleMatrixGenerator+3x3.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ScrambleMatrixGenerator+3x3.swift"; sourceTree = "<group>"; };
 		49922E222DF6D6250018EC64 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -177,12 +179,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		495FEF102DC4DBF50002FC2A /* ScrambleGrid */ = {
+		495FEF102DC4DBF50002FC2A /* ScrambleVisualisation */ = {
 			isa = PBXGroup;
 			children = (
+				496299A42E3C01B400CFF7E1 /* Scramble3DView.swift */,
 				495FEF112DC4DC0C0002FC2A /* ScrambleGrid.swift */,
 			);
-			path = ScrambleGrid;
+			path = ScrambleVisualisation;
 			sourceTree = "<group>";
 		};
 		495FEF132DC555070002FC2A /* ScrambleView */ = {
@@ -316,7 +319,7 @@
 			isa = PBXGroup;
 			children = (
 				495FEF132DC555070002FC2A /* ScrambleView */,
-				495FEF102DC4DBF50002FC2A /* ScrambleGrid */,
+				495FEF102DC4DBF50002FC2A /* ScrambleVisualisation */,
 			);
 			path = Scramble;
 			sourceTree = "<group>";
@@ -627,6 +630,7 @@
 				783D76A82D26CB2A0089891C /* NavbarView.swift in Sources */,
 				49922E2E2DF71E740018EC64 /* FirebaseDelegate.swift in Sources */,
 				78DE35C42D1CB9030061C4C5 /* Discipline.swift in Sources */,
+				496299A52E3C01BC00CFF7E1 /* Scramble3DView.swift in Sources */,
 				78C92DEA2D3408DA0067D833 /* SolveInfoBlock.swift in Sources */,
 				78DE35BC2D1B091E0061C4C5 /* StringExt.swift in Sources */,
 				49983BF32DF9DDAD00C769EB /* FirestoreManager.swift in Sources */,
