@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import UIKit
 
 struct ScrambleView: View {
     @EnvironmentObject var dataManager: DataManager
@@ -69,7 +70,7 @@ struct ScrambleView: View {
                     //stopwatch 1
                     VStack{
                         GeometryReader { geometry in
-                            Button(action: { // color does not change on device ?? UPD: Now has to work
+                            Button(action: {
                                 if LaunchReady || stopWatch.isRunning {
                                     stopWatch.toggleStopwatch()
                                     if (!stopWatch.isRunning){
@@ -110,6 +111,7 @@ struct ScrambleView: View {
                                         if !stopWatch.isRunning{
                                             self.LaunchReady = true
                                             isPressing = false
+                                            triggerImpactFeedback(style: .medium) //this
                                         }
                                     })
                             )
@@ -118,6 +120,16 @@ struct ScrambleView: View {
                                     .onEnded { _ in
                                         if isPressing {
                                             isPressing = false
+                                            isClicked = false 
+                                        }
+                                    }
+                            )
+                            .simultaneousGesture( // try this
+                                DragGesture(minimumDistance: 10)
+                                    .onChanged { _ in
+                                        if isPressing {
+                                            isPressing = false
+                                            isClicked = false
                                         }
                                     }
                             )
@@ -281,6 +293,12 @@ struct ScrambleView: View {
         .offset(y: 80)
         .font(.system(size: 20))
         .foregroundColor(themeManager.currentTheme.fourthColor.color)
+    }
+    
+    private func triggerImpactFeedback(style: UIImpactFeedbackGenerator.FeedbackStyle) {
+        let generator = UIImpactFeedbackGenerator(style: style)
+        generator.prepare()
+        generator.impactOccurred()
     }
 }
 
