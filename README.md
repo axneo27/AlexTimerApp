@@ -10,7 +10,7 @@ A speedcubing timer & utility app
 
 * Fully built with Swift and SwiftUI, modern app architecture
 * Uses CoreData for storing solves information and statistics
-* Simple and modern user interface
+* Simple and modern user interface with 2D and 3D scramble visualisation (SceneKit)
 * Has two themes available
 * Works both online and offline
 * Can take scramble data from my remote tnoodle API
@@ -31,7 +31,7 @@ A speedcubing timer & utility app
 * Essential timing functionalities:
   * Press mode
   * 15-second inspection mode
-  * Check scramble by visual representation
+  * Check scramble by visual representation (2D and 3D)
   * Custom scramble generation
 
 * Simple design for viewing statistics
