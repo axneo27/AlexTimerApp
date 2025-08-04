@@ -18,12 +18,12 @@ A speedcubing timer & utility app
 * Has networking functionality
 
 ## Screenshots
-### IOS
+### IOS 
 
-<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.20.54.png?raw=true" alt="timer orange" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.22.03.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.24.27.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.24.54.png?raw=true" alt="timer puzzles" width="150"/>
+<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.20.54.png?raw=true" alt="timer orange" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/2d.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/3d.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.24.54.png?raw=true" alt="timer puzzles" width="150"/>
 
 
-<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.25.06.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.26.46.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.27.06.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.28.50.png?raw=true" alt="timer puzzles" width="150"/>
+<img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.25.06.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.26.46.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/Simulator%20Screenshot%20-%20iPhone%2016%20-%202025-06-20%20at%2017.27.06.png?raw=true" alt="timer puzzles" width="150"/> <img src="https://github.com/axneo27/AlexTimerApp/blob/main/.github/v2images/received_new.png?raw=true" alt="timer puzzles" width="150"/>
 
 ## Features
 ### App features
